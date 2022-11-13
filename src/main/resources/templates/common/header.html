@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<style>
+
+
+</style>
+<header id="header" class="header" th:fragment="header" style="padding: 0 0px">
+
+    <!-- banner-->
+    <div class="top-left" style="width: 280px">
+        <div class="navbar-header" >
+            <a class="navbar-brand" th:href="@{/main.html}"style="background-color: #2dac92;width: 280px">
+                <img alt="Logo" style="margin-left: 25px" th:src="@{/static/images/logo-main.png}">
+            </a>
+
+        </div>
+    </div>
+    <!-- Huỷ bỏ-->
+    <div class="top-right">
+        <a id="menuToggle" class="menutoggle" style="float: left"><i class="fa fa-bars"></i></a>
+        <div class="header-menu">
+
+            <div class="form-group mr-2">
+                <label for="search-input" class="sr-only">Tra từ</label>
+                <input class="form-control mt-2 fa fa-search" type="search" id="search-input" aria-label="Search"
+                       placeholder="Nhấn Enter để tra">
+
+            </div>
+            <div class="header-left">
+                <div class="dropdown for-notification">
+                    <img alt="" style="width: 25px;height: 25px;margin:0 10px 0 10px" th:src="@{/static/images/tx.png}">
+                    <a><b>[[${session.loginUser.getUserName()}]]</b> </a>
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="notification"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-angle-down"></i>
+                    </button>
+
+                    <div class="dropdown-menu" aria-labelledby="notification">
+<!--                        <p class="red">Trung tâm điều khiển</p>-->
+                       
+                        <button onclick="UpdateUserName()" class="dropdown-item media">
+<!--                            <i class="fa fa-cog"></i>-->
+                            <p>Đổi tên</p>
+                        </button>
+                        <!--Sử dụng cửa sổ bật lên để thay đổi tên-->
+                        <script>
+                            var oldname = [[${session.loginUser.getUserName()}]];
+
+                            function UpdateUserName() {
+                                console.log(oldname);
+                                var newname = prompt("Vui lòng thay đổi tên của bạn：", "");
+                                if (newname == null || newname == "") {
+                                    false;
+                                } else {
+                                    window.location.href = "/getStringParam/" + newname;
+                                }
+                            }
+                        </script>
+
+                        <a class="dropdown-item media" th:href="@{/logout}">
+<!--                            <i class="fa fa-power-off"></i>-->
+                            <p>Đăng xuất</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js"></script>
+    <script>
+        let $search = $("#search-input");
+        $search.keypress(function (event) {
+            let word = $search.val().trim()
+            if (event.which === 13 && word !== null && word !== "") {
+                $.ajax({
+                    url: 'http://dict.youdao.com/suggest?q=' + word + '&num=1&doctype=json',
+                    type: 'GET',
+                    dataType: 'jsonp',
+                    cors: true,
+                    contentType: 'application/json',
+                    secure: true,
+                    headers: {
+                        'Access-Control-Allow-Origin': '*',
+                    },
+                    success: function (res) {
+                        alert(res.data.entries[0].explain)
+                    }
+                })
+            }
+
+        })
+    </script>
+</header>
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Mountain English</title>
+    <meta name="description" content="Ela Admin - HTML5 Admin Template">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="apple-touch-icon" href="https://i.imgur.com/QRAUqs9.png">
+    <link rel="shortcut icon" href="https://i.imgur.com/QRAUqs9.png">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.0/normalize.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/pixeden-stroke-7-icon@1.2.3/pe-icon-7-stroke/dist/pe-icon-7-stroke.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.0/css/flag-icon.min.css">
+    <link rel="stylesheet" th:href="@{/static/css/cs-skin-elastic.css}">
+    <link rel="stylesheet" th:href="@{/static/css/style.css}">
+
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
+
+</head>
+
+<body>
+<div th:replace="common/leftbar::leftbar"></div>
+
+
+<div id="right-panel" class="right-panel">
+
+    <div th:replace="common/header::header"/>
+
+
+    <div class="content">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="text-center">
+                            <h1 onclick="document.getElementById('audioPlay').play();" th:text="${word.getWordName()}"
+                                style="display: inline-block">CET4</h1>
+                            <i id="collect" class="fa fa-star-o fa-2x" aria-hidden="true" style="margin-left: 15px"></i>
+                            <br>
+                            [
+                            <span onclick="document.getElementById('audioPlay').play();" th:text="${word.getAudio()}">[apple]</span>
+                            ] <i onclick="document.getElementById('audioPlay').play();" class="fa fa-volume-up"
+                                 aria-hidden="true" style="margin-left: 20px"></i>
+                        </div>
+                        <audio id='audioPlay' th:src="${word.getPron()}" th:value="${word.getWordName()}"/>
+                    </div>
+                    <div class="card-body " id="body">
+                        <div class="text-right" style="margin-right: 45%">
+                            <button onclick="ShowAndHidden()" class="btn btn-info " id="btn-tips"
+                                    style="border-radius: 20px"><i
+                                    class="fa fa-lightbulb-o" aria-hidden="true"></i> Nhắc nhở
+                            </button>
+                        </div>
+                        <br>
+                        <!-- Câu ví dụ-->
+                        <div id="exp" class="text-center font-italic" style="visibility: hidden">
+                            <p>Theo lời nhắc, phán đoán diễn giải</p>
+                            Câu ví dụ：[[${word.getEnglishinstance2()}]]
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="text-center">
+                        <a id="yes" th:href="@{/rememberWord/}+${word.getWordId()}"
+                           class="btn btn-success btn-lg btn-block w-50"
+                           style="border-radius: 25px;background-color: #fffffc;cursor:pointer;color: #0a001f"
+                           onmouseout="this.style.background='#ffffff'"
+                           onmousemove="this.style.background='#209e85'">Đã nhớ</a>
+                        <a id="no" th:href="@{/unrememberWord/}+${word.getWordId()}"
+                           class="btn btn-danger btn-lg btn-block w-50"
+                           style="border-radius: 25px;background-color: #fffffc;cursor:pointer;color: #0a001f"
+                           onmouseout="this.style.background='#ffffff'" onmousemove="this.style.background='#f4434b'">Chưa nhớ</a>
+                        <!--                        <a th:href="@{/studyNextWord/}+${word.getGrade()}"-->
+                        <!--                           class="btn btn-secondary btn-lg btn-block w-50" style="border-radius: 25px">Bỏ qua</a>-->
+                        <a th:href="@{/addCollection/}+${word.getWordId()}"
+                           class="btn btn-outline-secondary btn-lg btn-block w-50" th:text="${msg}"
+                           id="collectbtn" style="border-radius: 25px">Thêm vào bộ sưu tập</a>
+                        <button onclick="ResetWord()" class="btn btn-outline-warning btn-lg btn-block w-50"
+                                style="border-radius: 25px">Học lại
+                        </button>
+                    </div>
+                </div>
+                <script>
+                    $(function () {
+
+                        if ($("#collectbtn").text() === 'Thêm vào bộ sưu tập thành công')
+                            x.removeClass("fa-star-o").addClass("fa-star")
+                        else
+                            x.removeClass("fa-star").addClass("fa-star-o");
+                    })
+                    let x = $("#collect");
+                    x.click(function () {
+                        $("#collect").removeClass("fa-star-o").addClass("fa-star")
+                    })
+
+                    function ResetWord() {
+                        if (confirm("Bạn có chắc chắn cần học lại không？")) {
+                            window.location.href = "/ResetWord/" + [[${word.getGrade()}]];
+                        } else {
+                            return false;
+                        }
+                    }
+
+                    function ShowAndHidden() {
+                        $("#exp").css("visibility", "visible");
+                        $("#btn-tips").css("visibility", "hidden");
+                        $("#yes").text("Nhớ ra rồi")
+                        $("#no").text('Chưa nghĩ ra')
+                    }
+
+                    $("#collectbtn").click(function () {
+                        if ($("#collectbtn").text() === 'Sưu tập thành công')
+                            x.removeClass("fa-star-o").addClass("fa-star")
+                        else
+                            x.removeClass("fa-star").addClass("fa-star-o");
+                    })
+                </script>
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+
+</div><!-- .content -->
+
+<div class="clearfix"></div>
+
+
+
+
+</div><!-- /#right-panel -->
+
+
+<!--<script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>-->
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
+<script th:src="@{/static/js/main.js}"></script>
+</body>
+</html>

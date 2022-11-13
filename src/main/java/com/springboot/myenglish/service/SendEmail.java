@@ -1,4 +1,6 @@
 package com.springboot.myenglish.service;
 
-public class SendEmail {
+public interface SendEmail {
+
+    void SendEmail(String to, String subject, String content);
 }

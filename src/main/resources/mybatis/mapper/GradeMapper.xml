@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--namespace：Ràng buộc một giao diện Dao/Mapper tương ứng-->
+<mapper namespace="com.springboot.myenglish.mapper.GradeMapper">
+
+    <!--Xem tất cả thông tin grade-->
+    <select id="queryAllGrade" resultType="com.springboot.myenglish.entity.GradeEntity">
+        select *
+        from learnenglish.grade
+    </select>
+    <!--Truy vấn một grade theo ID-->
+    <select id="queryGradeById" resultType="com.springboot.myenglish.entity.GradeEntity">
+        select *
+        from learnenglish.grade
+        where gradeId = #{gradeId}
+    </select>
+    <!--thêm một grade-->
+    <insert id="addGrade" parameterType="com.springboot.myenglish.entity.GradeEntity">
+        insert into learnenglish.grade(gradeId, gradeName)
+        values (#{gradeId}, #{gradeName});
+    </insert>
+    <!--xóa một grade-->
+    <delete id="deleteGrade" parameterType="Integer">
+        delete
+        from learnenglish.grade
+        where gradeId = #{gradeId}
+    </delete>
+    <!--sửa đổi một grade-->
+    <update id="updateGrade" parameterType="com.springboot.myenglish.entity.GradeEntity">
+        update learnenglish.grade
+        set gradeName=#{gradeName}
+        where gradeId = #{gradeId}
+    </update>
+
+
+</mapper>

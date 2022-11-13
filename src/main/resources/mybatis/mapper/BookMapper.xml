@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--namespace：Ràng buộc một giao diện Dao/Mapper tương ứng -->
+<mapper namespace="com.springboot.myenglish.mapper.BookMapper">
+
+    <!--Xem tất cả thông tin sách-->
+    <select id="queryAllBook" resultType="com.springboot.myenglish.entity.BookEntity">
+        select *
+        from learnenglish.book
+    </select>
+    <!--Truy vấn sách theo ID-->
+    <select id="queryBookById" resultType="com.springboot.myenglish.entity.BookEntity">
+        select *
+        from learnenglish.book
+        where bookId = #{bookId}
+    </select>
+    <!--thêm một cuốn sách-->
+    <insert id="addBook" parameterType="com.springboot.myenglish.entity.BookEntity">
+        insert into learnenglish.book(bookName, bookUser, description, content)
+        values (#{bookName}, #{bookUser}, #{description}, #{content});
+    </insert>
+    <!--xóa một cuốn sách-->
+    <delete id="deleteBook" parameterType="Integer">
+        delete
+        from learnenglish.book
+        where bookId = #{bookId}
+    </delete>
+    <!--sửa đổi một cuốn sách-->
+    <update id="updateBook" parameterType="com.springboot.myenglish.entity.BookEntity">
+        update learnenglish.book
+        set bookName=#{bookName},
+            bookUser=#{bookUser},
+            description=#{description},
+            content=#{content}
+        where bookId = #{bookId}
+    </update>
+
+
+</mapper>

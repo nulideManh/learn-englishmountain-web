@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<header id="header" class="header" th:fragment="header" style="padding: 0 0px">
+
+    <!-- banner-->
+    <div class="top-left" style="width: 280px">
+        <div class="navbar-header" >
+            <a class="navbar-brand" th:href="@{/main.html}"style="background-color: #2dac92;width: 280px">
+                <img alt="Logo" style="margin-left: 25px" th:src="@{'/static/images/logo-main.png'}">
+            </a>
+
+        </div>
+    </div>
+    <!-- Thanh điều hướng-->
+    <div class="top-right">
+        <a id="menuToggle" class="menutoggle" style="float: left"><i class="fa fa-bars"></i></a>
+        <div class="header-menu">
+
+
+        </div>
+    </div>
+
+
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js"></script>
+
+</header>
+</html>

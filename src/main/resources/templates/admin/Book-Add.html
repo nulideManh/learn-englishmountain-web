@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Get English</title>
+    <meta name="description" content="Karlz Admin - HTML5 Admin Template">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" th:href="@{/static/lib/editormd/css/editormd.min.css}" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.0/normalize.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pixeden-stroke-7-icon@1.2.3/pe-icon-7-stroke/dist/pe-icon-7-stroke.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.0/css/flag-icon.min.css">
+    <link rel="stylesheet" th:href="@{/static/css/cs-skin-elastic.css}">
+    <link rel="stylesheet" th:href="@{/static/css/style.css}">
+
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
+
+</head>
+<body>
+<div th:replace="common/admin-leftbar::leftbar"></div>
+
+<div id="right-panel" class="right-panel">
+
+    <div th:replace="common/admin-header::header"/>
+        <!--    Nội dung  -->
+        <div class="content">
+            <div >
+                <div class="card col-lg-12">
+                    <div class="card-header"> Add article</div>
+                    <div class="card-body card-block">
+                        <form th:action="@{/admin/addBook}" method="post" >
+                            <div class="form-group"><label  class=" form-control-label">Tên bài viết</label><input type="text" name="bookName"   class="form-control" required></div>
+                            <div class="form-group"><label class=" form-control-label">Tên tác giả</label><input type="text"  name="bookUser" class="form-control" required></div>
+                            <label class=" form-control-label">Giới thiệu bài viết</label>
+                            <textarea class="form-control" rows="3" name="description" required></textarea>
+
+                            <!--markdown-->
+                            <hr>
+                            <div id="test-editormd">
+                             <textarea placeholder="Nội dung sách" name="content" style="display: none" required>
+
+                             </textarea>
+                            </div>
+                            <div class="text-center">
+                                <button class="btn btn-success btn-lg btn-block w-50" type="submit">Thêm bài viết</button>
+                            </div>
+                        </form>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div><!-- .content -->
+
+    <div class="clearfix"></div>
+
+
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
+<!--<script th:src="@{/js/main.js}"></script>-->
+<script th:src="@{/static/lib/editormd/editormd.min.js}"></script>
+
+<script type="text/javascript" >
+    var testEditor;
+
+    $(function() {
+        testEditor = editormd("test-editormd", {
+            width   : "100%",
+            height  : 550,
+            syncScrolling : "single",
+            path    : "/static/lib/editormd/lib/"
+        });
+
+        /*
+        // or
+        testEditor = editormd({
+            id      : "test-editormd",
+            width   : "90%",
+            height  : 640,
+            path    : "../lib/"
+        });
+        */
+    });
+</script>
+
+</body>
+</html>
