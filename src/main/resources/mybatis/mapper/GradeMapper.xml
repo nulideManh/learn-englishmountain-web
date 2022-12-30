@@ -6,30 +6,30 @@
 <mapper namespace="com.springboot.myenglish.mapper.GradeMapper">
 
     <!--Xem tất cả thông tin grade-->
-    <select id="queryAllGrade" resultType="com.springboot.myenglish.entity.GradeEntity">
+    <select id="queryAllGrade" resultType="com.springboot.myenglish.pojo.Grade">
         select *
-        from learnenglish.grade
+        from zenglish.grade
     </select>
     <!--Truy vấn một grade theo ID-->
-    <select id="queryGradeById" resultType="com.springboot.myenglish.entity.GradeEntity">
+    <select id="queryGradeById" resultType="com.springboot.myenglish.pojo.Grade">
         select *
-        from learnenglish.grade
+        from zenglish.grade
         where gradeId = #{gradeId}
     </select>
     <!--thêm một grade-->
-    <insert id="addGrade" parameterType="com.springboot.myenglish.entity.GradeEntity">
-        insert into learnenglish.grade(gradeId, gradeName)
+    <insert id="addGrade" parameterType="com.springboot.myenglish.pojo.Grade">
+        insert into zenglish.grade(gradeId, gradeName)
         values (#{gradeId}, #{gradeName});
     </insert>
     <!--xóa một grade-->
     <delete id="deleteGrade" parameterType="Integer">
         delete
-        from learnenglish.grade
+        from zenglish.grade
         where gradeId = #{gradeId}
     </delete>
     <!--sửa đổi một grade-->
-    <update id="updateGrade" parameterType="com.springboot.myenglish.entity.GradeEntity">
-        update learnenglish.grade
+    <update id="updateGrade" parameterType="com.springboot.myenglish.pojo.Grade">
+        update zenglish.grade
         set gradeName=#{gradeName}
         where gradeId = #{gradeId}
     </update>

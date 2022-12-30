@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
-
 @Service
 public class SendEmailImpl implements SendEmail {
 
@@ -36,11 +35,10 @@ public class SendEmailImpl implements SendEmail {
             helper.setText(content, true);
             mailSender.send(message);
             //log information
-            logger.info("Mail đã được gửi。");
+            logger.info("Mail đã được gửi.");
         } catch (MessagingException e) {
             logger.error("Đã xảy ra lỗi khi gửi email！", e);
         }
 
     }
 }
-

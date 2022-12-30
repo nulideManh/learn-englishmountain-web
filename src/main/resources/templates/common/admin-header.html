@@ -5,23 +5,69 @@
     <!-- banner-->
     <div class="top-left" style="width: 280px">
         <div class="navbar-header" >
-            <a class="navbar-brand" th:href="@{/main.html}"style="background-color: #2dac92;width: 280px">
-                <img alt="Logo" style="margin-left: 25px" th:src="@{'/static/images/logo-main.png'}">
+            <a class="navbar-brand" th:href="@{/admin/main}"style="background-color: #fffffc;width: 280px">
+                <img alt="Logo" style="margin-left: 25px; margin-bottom: 5px" th:src="@{'/static/images/logo-main.png'}">
             </a>
 
         </div>
     </div>
     <!-- Thanh điều hướng-->
     <div class="top-right">
-        <a id="menuToggle" class="menutoggle" style="float: left"><i class="fa fa-bars"></i></a>
+        <a id="menuToggle" class="menutoggle" style="float: left">
+            <i class="fa fa-bars"></i>
+        </a>
         <div class="header-menu">
+            <form th:action="@{/admin/searchWord/1}" method="post">
+                <div class="form-group mr-2">
+                    <label for="search-input" class="sr-only">Tìm từ</label>
+                    <input class="form-control mt-2 fa fa-search" type="search" name="keyWords" id="search-input" aria-label="Search"
+                           placeholder="Nhập từ tìm kiếm">
+                </div>
+            </form>
+            <div class="header-left">
+                <div class="dropdown for-notification">
+                    <img alt="" style="width: 25px;height: 25px;margin:0 10px 0 10px" th:src="@{/static/images/tx.png}">
+                    <a><b>[[${session.loginUser.getUserName()}]]</b> </a>
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="notification"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-angle-down"></i>
+                    </button>
 
+                    <div class="dropdown-menu" aria-labelledby="notification">
+<!--                        <p class="red">Trung tâm điều khiển</p>-->
 
+                        <button onclick="UpdateUserName()" class="dropdown-item media">
+                            <i class="fa fa-cog"></i>
+                            <p>Đổi tên</p>
+                        </button>
+                        <!--Sử dụng cửa sổ bật lên để thay đổi tên-->
+                        <script>
+                            var oldname = [[${session.loginUser.getUserName()}]];
+
+                            function UpdateUserName() {
+                                console.log(oldname);
+                                var newname = prompt("Tên mới của bạn：", "");
+                                if (newname == null || newname === "") {
+                                    false;
+                                } else {
+                                    window.location.href = "/getStringParam/" + newname;
+                                }
+                            }
+                        </script>
+
+                        <a class="dropdown-item media" th:href="@{/logout}">
+                            <i class="fa fa-power-off"></i>
+                            <p>Đăng xuất</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
 
     <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js"></script>
+
 
 </header>
 </html>

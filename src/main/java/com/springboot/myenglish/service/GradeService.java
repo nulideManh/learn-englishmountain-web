@@ -1,24 +1,27 @@
 package com.springboot.myenglish.service;
 
-import com.springboot.myenglish.entity.GradeEntity;
+
+
+import com.springboot.myenglish.pojo.Grade;
 
 import java.util.List;
 
 public interface GradeService {
     //Truy vấn thông tin grade một dựa trên ID
-    GradeEntity queryGradeById(Integer gradeId);
+    Grade queryGradeById(Integer gradeId);
 
     //thêm grade
-    int addGrade(GradeEntity grade);
+    int addGrade(Grade grade);
 
     //xoá grade
     int deleteGrade(Integer gradeId);
 
     //Cập nhật grade
-    int updateGrade(GradeEntity grade);
+    int updateGrade(Grade grade);
 
     //Xem tất cả thông tin grade
-    List<GradeEntity> queryAllGrade();
+    List<Grade> queryAllGrade();
 
 }
+
 

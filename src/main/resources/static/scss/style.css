@@ -2333,7 +2333,9 @@ footer.site-footer {
     top: 51px !important; }
 
   .content {
-    padding: 1.25em; }
+    padding: 1.25em;
+    margin-top: 2em;
+  }
 
   .flotRealtime2 {
     height: 330px; }

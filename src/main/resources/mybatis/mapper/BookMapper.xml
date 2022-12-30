@@ -6,30 +6,30 @@
 <mapper namespace="com.springboot.myenglish.mapper.BookMapper">
 
     <!--Xem tất cả thông tin sách-->
-    <select id="queryAllBook" resultType="com.springboot.myenglish.entity.BookEntity">
+    <select id="queryAllBook" resultType="com.springboot.myenglish.pojo.Book">
         select *
-        from learnenglish.book
+        from zenglish.book
     </select>
     <!--Truy vấn sách theo ID-->
-    <select id="queryBookById" resultType="com.springboot.myenglish.entity.BookEntity">
+    <select id="queryBookById" resultType="com.springboot.myenglish.pojo.Book">
         select *
-        from learnenglish.book
+        from zenglish.book
         where bookId = #{bookId}
     </select>
     <!--thêm một cuốn sách-->
-    <insert id="addBook" parameterType="com.springboot.myenglish.entity.BookEntity">
-        insert into learnenglish.book(bookName, bookUser, description, content)
+    <insert id="addBook" parameterType="com.springboot.myenglish.pojo.Book">
+        insert into zenglish.book(bookName, bookUser, description, content)
         values (#{bookName}, #{bookUser}, #{description}, #{content});
     </insert>
     <!--xóa một cuốn sách-->
     <delete id="deleteBook" parameterType="Integer">
         delete
-        from learnenglish.book
+        from zenglish.book
         where bookId = #{bookId}
     </delete>
     <!--sửa đổi một cuốn sách-->
-    <update id="updateBook" parameterType="com.springboot.myenglish.entity.BookEntity">
-        update learnenglish.book
+    <update id="updateBook" parameterType="com.springboot.myenglish.pojo.Book">
+        update zenglish.book
         set bookName=#{bookName},
             bookUser=#{bookUser},
             description=#{description},

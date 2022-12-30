@@ -1,6 +1,8 @@
 package com.springboot.myenglish.controller.admin;
 
-import com.springboot.myenglish.entity.BookEntity;
+import com.github.pagehelper.PageInfo;
+import com.springboot.myenglish.pojo.Book;
+import com.springboot.myenglish.pojo.Word;
 import com.springboot.myenglish.service.Impl.BookServiceImpl;
 import com.springboot.myenglish.util.DataUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +29,7 @@ public class UpdateBookController {
      */
     @RequestMapping("/admin/viewBook")
     public String viewBook(Model model){
-        List<BookEntity> book = bookService.queryAllBook();
+        List<Book> book = bookService.queryAllBook();
         model.addAttribute("book",book);
         return "admin/Book-View";
     }
@@ -41,13 +43,13 @@ public class UpdateBookController {
     @RequestMapping("/admin/toUpdateBook/{bookId}")
     public String toUpdateBook(@PathVariable("bookId")Integer bookId, Model model){
 
-        BookEntity book = bookService.queryBookById(bookId);
+        Book book = bookService.queryBookById(bookId);
         model.addAttribute("book",book);
         return "admin/Book-Update";
     }
     //Thực hiện các thay đổi và gửi, quay lại trang view
     @RequestMapping("/admin/updateBook/{bookId}")
-    public String updateBook(@PathVariable("bookId")Integer bookId,BookEntity book){
+    public String updateBook(@PathVariable("bookId")Integer bookId,Book book){
 
 
         bookService.updateBook(book);
@@ -76,7 +78,7 @@ public class UpdateBookController {
         return "admin/Book-Add";
     }
     @PostMapping("/admin/addBook")
-    public String addBook(BookEntity book) throws ParseException {
+    public String addBook(Book book) throws ParseException {
 
 
         bookService.addBook(book);
@@ -84,4 +86,5 @@ public class UpdateBookController {
     }
 
 }
+
 

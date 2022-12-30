@@ -1,9 +1,9 @@
-package com.springboot.myenglish.entity;
+package com.springboot.myenglish.pojo;
 
 import lombok.Data;
 
 @Data
-public class BookEntity {
+public class Book {
     private int bookId;
     private String bookName;
     private String bookUser;

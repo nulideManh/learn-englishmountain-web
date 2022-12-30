@@ -1,7 +1,8 @@
 package com.springboot.myenglish.service.Impl;
 
-import com.springboot.myenglish.entity.GradeEntity;
+
 import com.springboot.myenglish.mapper.GradeMapper;
+import com.springboot.myenglish.pojo.Grade;
 import com.springboot.myenglish.service.GradeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,12 +15,12 @@ public class GradeServiceImpl implements GradeService {
     GradeMapper gradeMapper;
 
     @Override
-    public GradeEntity queryGradeById(Integer gradeId) {
+    public Grade queryGradeById(Integer gradeId) {
         return gradeMapper.queryGradeById(gradeId);
     }
 
     @Override
-    public int addGrade(GradeEntity grade) {
+    public int addGrade(Grade grade) {
         return gradeMapper.addGrade(grade);
     }
 
@@ -29,13 +30,14 @@ public class GradeServiceImpl implements GradeService {
     }
 
     @Override
-    public int updateGrade(GradeEntity grade) {
+    public int updateGrade(Grade grade) {
         return gradeMapper.updateGrade(grade);
     }
 
     @Override
-    public List<GradeEntity> queryAllGrade() {
+    public List<Grade> queryAllGrade() {
         return gradeMapper.queryAllGrade();
     }
 }
+
 

@@ -1,24 +1,29 @@
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/learnenglish?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8
-    #   url: jdbc:mysql://localhost:3306/learnenglish
+    url: jdbc:mysql://localhost:3306/zenglish?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8
     username: root
     password: MinhTri138
-  #    type: com.alibaba.druid.pool.DruidDataSource
 
+  main:
+    allow-circular-references: true
 
   mvc:
-    #Sau khi c?u h�nh n�, kh�ng c?n ph?i thay ??i ???ng d?n ?? di chuy?n trang html?
-    static-path-pattern: /static/**    #C�ch y�u c?u t�i nguy�n t?nh
+    #Sau khi cấu hình nó, không cần phải thay đổi đường dẫn để di chuyển trang html!
+    static-path-pattern: /static/**    #Cách yêu cầu tài nguyên tĩnh
+    resources:
+      static-locations: classpath:/static/  # Vị trí cấu hình của tài nguyên tĩnh, có thể được viết dưới dạng một mảng để định cấu hình nhiều thư mục
+
   mail:
-    host: smtp.qq.com
-    username: 412503533@qq.com  # ?i?a chi? email
-    password: rkhhvjurvnbtbjje # M� ?y quy?n
     properties:
       mail:
         smtp:
-          ssl:
-            enable: true
+          starttls:
+            enable: 'true'
+          auth: 'true'
+    host: smtp.gmail.com
+    username: manh.nv1005@gmail.com
+    password: lfzqxmtjtavrtley
+    port: '587'
 
   thymeleaf:
     cache: false
@@ -27,14 +32,10 @@ spring:
     suffix: .html
     servlet:
       content-type: text/html
-  web:
-    resources:
-      static-locations: classpath:/static/
-
 
 mybatis:
   mapper-locations: classpath:mybatis/mapper/*.xml
-  type-aliases-package: com.springboot.myenglish.entity
+  type-aliases-package: com.group19.learnenglishweb.pojo
   configuration:
     map-underscore-to-camel-case: on #Camel case
 
@@ -45,5 +46,3 @@ pagehelper:
   reasonable: true
   supportMethodsArguments: true
   params: count=countSql
-
-

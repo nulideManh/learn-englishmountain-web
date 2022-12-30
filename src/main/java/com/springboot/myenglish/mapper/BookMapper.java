@@ -1,23 +1,18 @@
 package com.springboot.myenglish.mapper;
 
-import com.springboot.myenglish.entity.BookEntity;
+import com.springboot.myenglish.pojo.Book;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-
 @Mapper
 @Repository
 public interface BookMapper {
-    //Truy vấn thông tin về sách theo ID
-    BookEntity queryBookById(Integer bookId);
-    //thêm sách
-    int addBook(BookEntity book);
-    //xóa sách
+    Book queryBookById(Integer bookId);
+    int addBook(Book book);
     int deleteBook(Integer bookId);
-    //cập nhật sách
-    int updateBook(BookEntity book);
-    //Xem tất cả thông tin sách
-    List<BookEntity> queryAllBook();
+    int updateBook(Book book);
+    List<Book> queryAllBook();
+    List<Book> queryBookByKeyWords(String keyWords);
 
 }

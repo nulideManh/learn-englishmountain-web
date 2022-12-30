@@ -5,19 +5,19 @@
 <!--namespace：Ràng buộc một giao diện Dao/Mapper tương ứng-->
 <mapper namespace="com.springboot.myenglish.mapper.UserMapper">
     <!--  thêm người dùng-->
-    <insert id="addUser" parameterType="com.springboot.myenglish.entity.UserEntity">
-        insert into learnenglish.user (userName, password, email, activeCode, activeStatus, role)
+    <insert id="addUser" parameterType="com.springboot.myenglish.pojo.User">
+        insert into zenglish.user (userName, password, email, activeCode, activeStatus, role)
         values (#{userName}, #{password}, #{email}, #{activeCode}, #{activeStatus}, #{role});
     </insert>
     <!--xoá người dùng-->
     <delete id="deleteUser" parameterType="Integer">
         delete
-        from learnenglish.user
+        from zenglish.user
         where userId = #{userId}
     </delete>
     <!--sửa thông tin người dùng-->
-    <update id="updateUser" parameterType="com.springboot.myenglish.entity.UserEntity">
-        update learnenglish.user
+    <update id="updateUser" parameterType="com.springboot.myenglish.pojo.User">
+        update zenglish.user
         set userName=#{userName},
             email=#{email},
             password=#{password},
@@ -27,40 +27,40 @@
         where userId = #{userId};
     </update>
     <!--Xem tất cả thông tin người dùng-->
-    <select id="queryAllUser" resultType="com.springboot.myenglish.entity.UserEntity">
+    <select id="queryAllUser" resultType="com.springboot.myenglish.pojo.User">
         select *
-        from learnenglish.user
+        from zenglish.user
     </select>
 
 
     <!-- Truy vấn người dùng bằng mã kích hoạt-->
-    <select id="queryUserByActiveCode" resultType="com.springboot.myenglish.entity.UserEntity">
+    <select id="queryUserByActiveCode" resultType="com.springboot.myenglish.pojo.User">
         select *
-        from learnenglish.user
+        from zenglish.user
         where activeCode = #{activeCode}
     </select>
 
     <!-- Đăng nhập người dùng thông thường, đăng nhập theo mật khẩu tài khoản và mã trạng thái (1)-->
-    <select id="loginByEmailAndPasswordAndActiveStatus" resultType="com.springboot.myenglish.entity.UserEntity">
+    <select id="loginByEmailAndPasswordAndActiveStatus" resultType="com.springboot.myenglish.pojo.User">
         select *
         from user
-        where learnenglish.user.email = #{email}
+        where zenglish.user.email = #{email}
           and password = #{password}
           and activeStatus = 1
     </select>
     <!--Đăng nhập quản trị viên, đăng nhập theo mật khẩu tài khoản và Role(1)-->
-    <select id="AdminLogin" resultType="com.springboot.myenglish.entity.UserEntity">
+    <select id="AdminLogin" resultType="com.springboot.myenglish.pojo.User">
         select *
         from user
-        where learnenglish.user.email = #{email}
+        where zenglish.user.email = #{email}
           and password = #{password}
           and role = 1
     </select>
 
     <!--truy vấn người dùng theo id-->
-    <select id="queryUserById" resultType="com.springboot.myenglish.entity.UserEntity">
+    <select id="queryUserById" resultType="com.springboot.myenglish.pojo.User">
         select *
-        from learnenglish.user
+        from zenglish.user
         where userId = #{userId}
     </select>
 

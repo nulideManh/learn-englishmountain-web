@@ -35,7 +35,7 @@ public class DataUtils {
         Date date = new Date();
 
         //đặt định dạng ngày
-        SimpleDateFormat format =new SimpleDateFormat("yyyy-MM-dd" );
+        SimpleDateFormat format =new SimpleDateFormat("dd-MM-yyyy" );
         //Bây giờ ngày là yyyy-MM-dd, thuộc loại Chuỗi
         String formatDate = format.format(date);
         //Chuyển đổi loại chuỗi thành loại ngày tháng
@@ -44,3 +44,4 @@ public class DataUtils {
     }
 
 }
+

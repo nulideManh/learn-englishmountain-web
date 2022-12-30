@@ -1,9 +1,9 @@
-package com.springboot.myenglish.entity;
+package com.springboot.myenglish.pojo;
 
 import lombok.Data;
 
 @Data
-public class UserEntity {
+public class User {
     private Integer userId;
     private String userName;
     private String password;

@@ -7,15 +7,15 @@ import javax.servlet.http.HttpServletResponse;
 
 public class LoginHandlerInterceptor implements HandlerInterceptor {
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        //Sau khi đăng nhập thành công, sẽ tới phiên của người dùng.
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception
+    {
+        //Sau khi đăng nhập thành công, sẽ tới session của người dùng.
         Object loginUser = request.getSession().getAttribute("loginUser");
-        if (loginUser==null){
+        if (loginUser == null){
             request.setAttribute("msg","Không được phép, vui lòng đăng nhập trước");
-            request.getRequestDispatcher("/index.html").forward(request,response);
+            request.getRequestDispatcher("/toAdmin").forward(request,response);
             return false;
-        }else {
+        }else
             return true;
-        }
     }
 }

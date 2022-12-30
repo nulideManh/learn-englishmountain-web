@@ -2,174 +2,156 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<!--namespace：Ràng buộc một giao diện Dao/Mapper tương ứng-->
 <mapper namespace="com.springboot.myenglish.mapper.WordMapper">
 
-    <!--thêm một từ-->
-    <insert id="addWord" parameterType="com.springboot.myenglish.entity.WordEntity">
-        insert into learnenglish.word(wordName, audio, englishInstance1, vietnameseInstance1, englishInstance2,
-                                    vietnameseInstance2, explanation, grade)
+    <insert id="addWord" parameterType="com.springboot.myenglish.pojo.Word">
+        insert into zenglish.word(wordName, audio, englishInstance1, vietnameseInstance1, englishInstance2,
+                                  vietnameseInstance2, explanation, grade)
         values (#{wordName}, #{audio}, #{englishInstance1}, #{vietnameseInstance1}, #{englishInstance2},
                 #{vietnameseInstance2}, #{explanation}, #{grade});
     </insert>
 
-    <!--xóa một từ-->
     <delete id="deleteWord" parameterType="Integer">
         delete
-        from learnenglish.word
+        from zenglish.word
         where wordId = #{wordId}
     </delete>
 
-    <!--sửa đổi một từ-->
-    <update id="updateWord" parameterType="com.springboot.myenglish.entity.WordEntity">
-        update learnenglish.word
+    <update id="updateWord" parameterType="com.springboot.myenglish.pojo.Word">
+        update zenglish.word
         set wordName=#{wordName},
             audio=#{audio},
             explanation=#{explanation},
+            englishInstance1=#{englishInstance1},
+            vietnameseInstance1=#{vietnameseInstance1},
+            englishInstance2=#{englishInstance2},
+            vietnameseInstance2=#{vietnameseInstance2},
             grade=#{grade}
         where wordId = #{wordId};
     </update>
-    <!--Sửa đổi từ study thành 1-->
     <update id="updateWordStudy1" parameterType="Integer">
-        update learnenglish.word
-        set study=1
+        update zenglish.word
+        set study = 1
         where wordId = #{wordId}
     </update>
-    <!--Sửa đổi từ study thành 0-->
     <update id="updateWordStudy0" parameterType="Integer">
-        update learnenglish.word
-        set study=0
+        update zenglish.word
+        set study = 0
         where wordId = #{wordId}
     </update>
 
-    <!--Sửa một từ Remember thành 1-->
     <update id="updateWordRemember1" parameterType="Integer">
-        update learnenglish.word
-        set remember=1
+        update zenglish.word
+        set remember = 1
         where wordId = #{wordId}
     </update>
-    <!--Sửa một từ Remember thành 0-->
     <update id="updateWordRemember0" parameterType="Integer">
-        update learnenglish.word
-        set remember=0
+        update zenglish.word
+        set remember = 0
         where wordId = #{wordId}
     </update>
 
-    <!--Sửa đổi Collection từ thành 1-->
     <update id="updateWordCollection1" parameterType="Integer">
-        update learnenglish.word
+        update zenglish.word
         set collection=1
         where wordId = #{wordId}
     </update>
-    <!--Sửa đổi Collection từ thành 0-->
     <update id="updateWordCollection0" parameterType="Integer">
-        update learnenglish.word
+        update zenglish.word
         set collection=0
         where wordId = #{wordId}
     </update>
 
-    <!--Học lại các từ dựa trên grade-->
     <update id="updateWordStudyByGrade" parameterType="Integer">
-        update learnenglish.word
+        update zenglish.word
         set study=0,
             remember=0
         where grade = #{grade}
     </update>
 
 
-    <!--Truy vấn tất cả thông tin từ-->
-    <select id="queryAllWord" resultType="com.springboot.myenglish.entity.WordEntity">
+    <select id="queryAllWord" resultType="com.springboot.myenglish.pojo.Word">
         select *
-        from learnenglish.word
+        from zenglish.word
     </select>
 
-    <!--Truy vấn thông tin về một từ theo ID-->
-    <select id="queryWordById" resultType="com.springboot.myenglish.entity.WordEntity">
+    <select id="queryWordById" resultType="com.springboot.myenglish.pojo.Word">
         select *
-        from learnenglish.word
+        from zenglish.word
         where wordId = #{wordId}
     </select>
 
-    <!--
-
-       Chức năng học tập (truy vấn một từ ngẫu nhiên từ cơ sở dữ liệu）
-
-    -->
-
-    <!--Truy vấn các từ chưa nhớ dựa trên grade-->
-    <select id="queryWordStudy0ByGrade" resultType="com.springboot.myenglish.entity.WordEntity">
+    <select id="queryWordByKeyWords" resultType="com.springboot.myenglish.pojo.Word">
+        <bind name="pattern" value="'%' + keyWords + '%'" />
         select *
-        from learnenglish.word
+        from zenglish.word
+        where wordName like #{pattern}
+    </select>
+
+    <select id="queryWordStudy0ByGrade" resultType="com.springboot.myenglish.pojo.Word">
+        select *
+        from zenglish.word
         where study = 0
           and grade = #{grade}
         ORDER BY RAND()
-        limit 1
+            limit 1
     </select>
 
-    <!--Truy vấn số lượng tất cả các từ theo grade -->
     <select id="queryAllWordNumberByGrade" resultType="int">
         SELECT COUNT(wordId)
-        FROM learnenglish.word
+        FROM zenglish.word
         where grade = #{grade}
     </select>
-    <!--Truy vấn số lượng từ đã nhớ theo grade -->
     <select id="queryRememberNumberByGrade" resultType="int">
         SELECT COUNT(wordId)
-        FROM learnenglish.word
+        FROM zenglish.word
         where grade = #{grade}
           and remember = 1
     </select>
-    <!--Truy vấn số lượng từ đã học dựa trên grade-->
     <select id="queryStudyNumberByGrade" resultType="int">
         SELECT COUNT(wordId)
-        FROM learnenglish.word
+        FROM zenglish.word
         where grade = #{grade}
           and study = 1
     </select>
 
 
-    <!--Tìm kiếm tất cả các từ yêu thích -->
-    <select id="queryAllWordCollection" resultType="com.springboot.myenglish.entity.WordEntity">
+    <select id="queryAllWordCollection" resultType="com.springboot.myenglish.pojo.Word">
         select *
-        from learnenglish.word
+        from zenglish.word
         where collection = 1
     </select>
 
-    <!--Tìm kiếm các từ yêu thích theo Grade -->
-    <select id="queryWordCollectionByGrade" resultType="com.springboot.myenglish.entity.WordEntity">
+    <select id="queryWordCollectionByGrade" resultType="com.springboot.myenglish.pojo.Word">
         select *
-        from learnenglish.word
+        from zenglish.word
         where collection = 1
           and grade = #{grade}
     </select>
 
-    <!--Tìm tất cả các từ đã ghi nhớ -->
-    <select id="queryAllRemember" resultType="com.springboot.myenglish.entity.WordEntity">
+    <select id="queryAllRemember" resultType="com.springboot.myenglish.pojo.Word">
         select *
-        from learnenglish.word
+        from zenglish.word
         where Remember = 1
     </select>
 
-    <!--Truy vấn các từ đã ghi nhớ dựa trên grade -->
-    <select id="queryAllWordRememberByGrade" resultType="com.springboot.myenglish.entity.WordEntity">
+    <select id="queryAllWordRememberByGrade" resultType="com.springboot.myenglish.pojo.Word">
         select *
-        from learnenglish.word
+        from zenglish.word
         where Remember = 1
           and grade = #{grade}
     </select>
 
-    <!--Truy vấn các từ chưa nhớ dựa trên grade -->
-    <select id="queryAllWordUnrememberedByGrade" resultType="com.springboot.myenglish.entity.WordEntity">
+    <select id="queryAllWordUnrememberedByGrade" resultType="com.springboot.myenglish.pojo.Word">
         select *
-        from learnenglish.word
+        from zenglish.word
         where Remember = 1
           and grade = #{grade}
     </select>
 
-    <!--Tìm tất cả các từ chưa được ghi nhớ -->
-    <select id="queryAllUnremembered" resultType="com.springboot.myenglish.entity.WordEntity">
+    <select id="queryAllUnremembered" resultType="com.springboot.myenglish.pojo.Word">
         select *
-        from learnenglish.word
+        from zenglish.word
         where Remember = 0
     </select>
 

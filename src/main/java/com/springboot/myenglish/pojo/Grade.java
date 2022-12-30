@@ -1,9 +1,10 @@
-package com.springboot.myenglish.entity;
+package com.springboot.myenglish.pojo;
 
 import lombok.Data;
 
 @Data
-public class GradeEntity {
+public class Grade {
     private Integer gradeId;
     private String gradeName;
 }
+
