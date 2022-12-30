@@ -8,28 +8,28 @@
     <!--Xem tất cả thông tin sách-->
     <select id="queryAllBook" resultType="com.springboot.myenglish.pojo.Book">
         select *
-        from zenglish.book
+        from sql8587252.book
     </select>
     <!--Truy vấn sách theo ID-->
     <select id="queryBookById" resultType="com.springboot.myenglish.pojo.Book">
         select *
-        from zenglish.book
+        from sql8587252.book
         where bookId = #{bookId}
     </select>
     <!--thêm một cuốn sách-->
     <insert id="addBook" parameterType="com.springboot.myenglish.pojo.Book">
-        insert into zenglish.book(bookName, bookUser, description, content)
+        insert into sql8587252.book(bookName, bookUser, description, content)
         values (#{bookName}, #{bookUser}, #{description}, #{content});
     </insert>
     <!--xóa một cuốn sách-->
     <delete id="deleteBook" parameterType="Integer">
         delete
-        from zenglish.book
+        from sql8587252.book
         where bookId = #{bookId}
     </delete>
     <!--sửa đổi một cuốn sách-->
     <update id="updateBook" parameterType="com.springboot.myenglish.pojo.Book">
-        update zenglish.book
+        update sql8587252.book
         set bookName=#{bookName},
             bookUser=#{bookUser},
             description=#{description},
