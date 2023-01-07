@@ -5,21 +5,24 @@ import com.springboot.myenglish.pojo.User;
 import com.springboot.myenglish.service.Impl.SendEmailImpl;
 import com.springboot.myenglish.service.Impl.UserServiceImpl;
 import com.springboot.myenglish.util.IDUtils;
+import org.sonatype.sisu.siesta.common.error.BadRequestException;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 
-@Controller
-public class RegisterController {
+@RestController
+@RequestMapping("/api/user")
+public class UserController {
     @Resource
     private UserServiceImpl userService;
 
     @Resource
     private SendEmailImpl sendEmail;
-    @RequestMapping("/register")
+    @PostMapping("/register")
     public ResponseEntity<?> register(User user){
         //System.out.println(userService.queryUserByEmail(user.getEmail()));
         if (userService.queryUserByEmail(user.getEmail()) == null) {
@@ -37,7 +40,7 @@ public class RegisterController {
         return ResponseEntity.ok(user);
     }
 
-    @RequestMapping("/user/checkCode")
+    @PutMapping("/checkCode")
     public ResponseEntity<?> active(String activeCode){
         User user = userService.queryUserByActiveCode(activeCode);
         if (user != null)
@@ -47,6 +50,16 @@ public class RegisterController {
             userService.updateUser(user);
         }
         return ResponseEntity.ok(user);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<?> login(User user){
+        User usr = userService.loginByEmailAndPasswordAndActiveStatus(user);
+        if (usr == null){
+            throw new BadRequestException("Mật khẩu hoặc email không chính xác");
+        }else {
+            return ResponseEntity.ok(usr);
+        }
     }
 
 }

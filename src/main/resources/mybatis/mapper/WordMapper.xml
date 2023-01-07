@@ -5,7 +5,7 @@
 <mapper namespace="com.springboot.myenglish.mapper.WordMapper">
 
     <insert id="addWord" parameterType="com.springboot.myenglish.pojo.Word">
-        insert into sql8587252.word(wordName, audio, englishInstance1, vietnameseInstance1, englishInstance2,
+        insert into zenglish.word(wordName, audio, englishInstance1, vietnameseInstance1, englishInstance2,
                                   vietnameseInstance2, explanation, grade)
         values (#{wordName}, #{audio}, #{englishInstance1}, #{vietnameseInstance1}, #{englishInstance2},
                 #{vietnameseInstance2}, #{explanation}, #{grade});
@@ -13,12 +13,12 @@
 
     <delete id="deleteWord" parameterType="Integer">
         delete
-        from sql8587252.word
+        from zenglish.word
         where wordId = #{wordId}
     </delete>
 
     <update id="updateWord" parameterType="com.springboot.myenglish.pojo.Word">
-        update sql8587252.word
+        update zenglish.word
         set wordName=#{wordName},
             audio=#{audio},
             explanation=#{explanation},
@@ -30,40 +30,40 @@
         where wordId = #{wordId};
     </update>
     <update id="updateWordStudy1" parameterType="Integer">
-        update sql8587252.word
+        update zenglish.word
         set study = 1
         where wordId = #{wordId}
     </update>
     <update id="updateWordStudy0" parameterType="Integer">
-        update sql8587252.word
+        update zenglish.word
         set study = 0
         where wordId = #{wordId}
     </update>
 
     <update id="updateWordRemember1" parameterType="Integer">
-        update sql8587252.word
+        update zenglish.word
         set remember = 1
         where wordId = #{wordId}
     </update>
     <update id="updateWordRemember0" parameterType="Integer">
-        update sql8587252.word
+        update zenglish.word
         set remember = 0
         where wordId = #{wordId}
     </update>
 
     <update id="updateWordCollection1" parameterType="Integer">
-        update sql8587252.word
+        update zenglish.word
         set collection=1
         where wordId = #{wordId}
     </update>
     <update id="updateWordCollection0" parameterType="Integer">
-        update sql8587252.word
+        update zenglish.word
         set collection=0
         where wordId = #{wordId}
     </update>
 
     <update id="updateWordStudyByGrade" parameterType="Integer">
-        update sql8587252.word
+        update zenglish.word
         set study=0,
             remember=0
         where grade = #{grade}
@@ -72,25 +72,25 @@
 
     <select id="queryAllWord" resultType="com.springboot.myenglish.pojo.Word">
         select *
-        from sql8587252.word
+        from zenglish.word
     </select>
 
     <select id="queryWordById" resultType="com.springboot.myenglish.pojo.Word">
         select *
-        from sql8587252.word
+        from zenglish.word
         where wordId = #{wordId}
     </select>
 
     <select id="queryWordByKeyWords" resultType="com.springboot.myenglish.pojo.Word">
         <bind name="pattern" value="'%' + keyWords + '%'" />
         select *
-        from sql8587252.word
+        from zenglish.word
         where wordName like #{pattern}
     </select>
 
     <select id="queryWordStudy0ByGrade" resultType="com.springboot.myenglish.pojo.Word">
         select *
-        from sql8587252.word
+        from zenglish.word
         where study = 0
           and grade = #{grade}
         ORDER BY RAND()
@@ -99,18 +99,18 @@
 
     <select id="queryAllWordNumberByGrade" resultType="int">
         SELECT COUNT(wordId)
-        FROM sql8587252.word
+        FROM zenglish.word
         where grade = #{grade}
     </select>
     <select id="queryRememberNumberByGrade" resultType="int">
         SELECT COUNT(wordId)
-        FROM sql8587252.word
+        FROM zenglish.word
         where grade = #{grade}
           and remember = 1
     </select>
     <select id="queryStudyNumberByGrade" resultType="int">
         SELECT COUNT(wordId)
-        FROM sql8587252.word
+        FROM zenglish.word
         where grade = #{grade}
           and study = 1
     </select>
@@ -118,40 +118,40 @@
 
     <select id="queryAllWordCollection" resultType="com.springboot.myenglish.pojo.Word">
         select *
-        from sql8587252.word
+        from zenglish.word
         where collection = 1
     </select>
 
     <select id="queryWordCollectionByGrade" resultType="com.springboot.myenglish.pojo.Word">
         select *
-        from sql8587252.word
+        from zenglish.word
         where collection = 1
           and grade = #{grade}
     </select>
 
     <select id="queryAllRemember" resultType="com.springboot.myenglish.pojo.Word">
         select *
-        from sql8587252.word
+        from zenglish.word
         where Remember = 1
     </select>
 
     <select id="queryAllWordRememberByGrade" resultType="com.springboot.myenglish.pojo.Word">
         select *
-        from sql8587252.word
+        from zenglish.word
         where Remember = 1
           and grade = #{grade}
     </select>
 
     <select id="queryAllWordUnrememberedByGrade" resultType="com.springboot.myenglish.pojo.Word">
         select *
-        from sql8587252.word
+        from zenglish.word
         where Remember = 1
           and grade = #{grade}
     </select>
 
     <select id="queryAllUnremembered" resultType="com.springboot.myenglish.pojo.Word">
         select *
-        from sql8587252.word
+        from zenglish.word
         where Remember = 0
     </select>
 

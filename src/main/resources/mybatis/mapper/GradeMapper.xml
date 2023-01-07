@@ -8,28 +8,28 @@
     <!--Xem tất cả thông tin grade-->
     <select id="queryAllGrade" resultType="com.springboot.myenglish.pojo.Grade">
         select *
-        from sql8587252.grade
+        from zenglish.grade
     </select>
     <!--Truy vấn một grade theo ID-->
     <select id="queryGradeById" resultType="com.springboot.myenglish.pojo.Grade">
         select *
-        from sql8587252.grade
+        from zenglish.grade
         where gradeId = #{gradeId}
     </select>
     <!--thêm một grade-->
     <insert id="addGrade" parameterType="com.springboot.myenglish.pojo.Grade">
-        insert into sql8587252.grade(gradeId, gradeName)
+        insert into zenglish.grade(gradeId, gradeName)
         values (#{gradeId}, #{gradeName});
     </insert>
     <!--xóa một grade-->
     <delete id="deleteGrade" parameterType="Integer">
         delete
-        from sql8587252.grade
+        from zenglish.grade
         where gradeId = #{gradeId}
     </delete>
     <!--sửa đổi một grade-->
     <update id="updateGrade" parameterType="com.springboot.myenglish.pojo.Grade">
-        update sql8587252.grade
+        update zenglish.grade
         set gradeName=#{gradeName}
         where gradeId = #{gradeId}
     </update>

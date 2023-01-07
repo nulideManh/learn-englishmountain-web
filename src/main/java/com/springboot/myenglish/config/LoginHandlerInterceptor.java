@@ -15,7 +15,7 @@ public class LoginHandlerInterceptor implements HandlerInterceptor {
             request.setAttribute("msg","Không được phép, vui lòng đăng nhập trước");
             request.getRequestDispatcher("/toAdmin").forward(request,response);
             return false;
-        }else
+        } else
             return true;
     }
 }

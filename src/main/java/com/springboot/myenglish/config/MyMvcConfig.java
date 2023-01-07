@@ -19,7 +19,7 @@ public class MyMvcConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new LoginHandlerInterceptor())
                 .addPathPatterns("/**")
-                .excludePathPatterns("/static/**", "/index.html", "/toAdmin", "/admin");
+                .excludePathPatterns("/static/**", "/index.html", "/toAdmin", "/admin", "/api/user/checkCode", "toforget");
     }
 }
 

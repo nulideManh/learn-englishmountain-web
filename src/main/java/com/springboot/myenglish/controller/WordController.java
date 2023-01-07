@@ -35,7 +35,7 @@ public class WordController {
 
 
     // Những từ đã nhớ
-    @RequestMapping("/rememberWord")
+    @GetMapping("/remember")
     public ResponseEntity<?> RememberWord(){
         return ResponseEntity.ok(wordService.queryAllRemember());
     }
@@ -43,7 +43,7 @@ public class WordController {
 
 
     // Lần đầu nhớ, lần 2 quên, sửa remember về 0
-    @RequestMapping("/forgetWord/{wordId}")
+    @RequestMapping("/forgot/{wordId}")
     public ResponseEntity<Word> ForgetWord(@PathVariable("wordId")int wordId){
         wordService.updateWordRemember0(wordId);
         Word word = wordService.queryWordById(wordId);
